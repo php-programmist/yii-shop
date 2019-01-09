@@ -66,7 +66,7 @@ $this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+	                    <a href="<?= \yii\helpers\Url::home()?>"><?= Html::img('@web/images/home/logo.png', ['alt' => 'E-SHOPPER'])?></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">
@@ -121,7 +121,7 @@ $this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="<?= \yii\helpers\Url::home()?>" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="shop.html">Products</a></li>
