@@ -2535,3 +2535,6 @@ h2.title {
     display: flex;
     flex-flow: row wrap;
 }
+.content-center{
+    justify-content: center;
+}

@@ -112,7 +112,7 @@ use yii\helpers\Html;
 <?php if( !empty($hits) ): ?>
 <div class="features_items"><!--features_items-->
     <h2 class="title text-center">Features Items</h2>
-    <div class="row d-flex">
+    <div class="row d-flex content-center">
 	    <?php foreach($hits as $hit): ?>
     <div class="col-sm-4 d-flex">
         <div class="product-image-wrapper">
