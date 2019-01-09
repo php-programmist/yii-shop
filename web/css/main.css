@@ -2531,3 +2531,7 @@ h2.title {
 }
 
 
+.d-flex {
+    display: flex;
+    flex-flow: row wrap;
+}

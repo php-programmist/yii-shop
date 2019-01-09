@@ -112,8 +112,9 @@ use yii\helpers\Html;
 <?php if( !empty($hits) ): ?>
 <div class="features_items"><!--features_items-->
     <h2 class="title text-center">Features Items</h2>
-    <?php foreach($hits as $hit): ?>
-    <div class="col-sm-4">
+    <div class="row d-flex">
+	    <?php foreach($hits as $hit): ?>
+    <div class="col-sm-4 d-flex">
         <div class="product-image-wrapper">
             <div class="single-products">
                 <div class="productinfo text-center">
@@ -145,6 +146,7 @@ use yii\helpers\Html;
         </div>
     </div>
     <?php endforeach;?>
+    </div>
 </div><!--features_items-->
 <?php endif; ?>
 
