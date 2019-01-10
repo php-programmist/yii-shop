@@ -101,11 +101,12 @@ use yii\helpers\Html;
 							<span>
 									<span>US $<?= $product->price ?></span>
 									<label>Quantity:</label>
-									<input type="text" value="1" />
-									<button type="button" class="btn btn-fefault cart">
+									<input type="text" value="1" id="qty" />
+									<a href="<?php echo \yii\helpers\Url::to(['cart/add', 'id' => $product->id]) ?>"
+									   class="btn btn-fefault add-to-cart cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         Add to cart
-                                    </button>
+                                    </a>
 								</span>
 							<p><b>Availability:</b> In Stock</p>
 							<p><b>Condition:</b> New</p>
@@ -318,9 +319,10 @@ use yii\helpers\Html;
 						<div class="carousel-inner">
                             <?php $count = count($hits);
                             
-                            for ($i= 0; $i<$count;$i++): ?>
+                            for ($i = 0 ; $i < $count ; $i++): ?>
                                 <?php if ($i % 3 == 0): ?>
-									<div class="item <?php if ($i == 0) echo 'active' ?>">
+									<div class="item <?php if ($i == 0)
+                                        echo 'active' ?>">
                                 <?php endif; ?>
 								<div class="col-sm-4">
 									<div class="product-image-wrapper">
@@ -333,18 +335,20 @@ use yii\helpers\Html;
                                                         'product/view',
                                                         'id' => $hits[$i]->id,
                                                     ]) ?>"><?= $hits[$i]->name ?></a></p>
-												<button type="button" class="btn btn-default add-to-cart"><i
-															class="fa fa-shopping-cart"></i>Add to cart
-												</button>
+												<a href="<?php echo \yii\helpers\Url::to(['cart/add', 'id' => $hits[$i]->id]) ?>"
+												   class="btn btn-fefault add-to-cart cart">
+													<i class="fa fa-shopping-cart"></i>
+													Add to cart
+												</a>
 											</div>
 										</div>
 									</div>
 								</div>
                                 <?php
-                                if ($i % 3 == 2 || $i == $count+1): ?>
+                                if ($i % 3 == 2 || $i == $count + 1): ?>
 									</div>
                                 <?php endif; ?>
-                            <?php endfor; ?>
+                            <?php endfor ; ?>
 						</div>
 						<a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
 							<i class="fa fa-angle-left"></i>

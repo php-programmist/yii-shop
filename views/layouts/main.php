@@ -8,10 +8,13 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use \yii\bootstrap\Modal;
 
 AppAsset::register($this);
 $this->registerJsFile('js/html5shiv.js',['position' => yii\web\View::POS_HEAD,'condition' =>'lte IE9']);
-$this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,'condition' =>'lte IE9'])
+$this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,'condition' =>'lte IE9']);
+$session = Yii::$app->session;
+$session->open();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -98,7 +101,7 @@ $this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,
                             <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="#" onclick="getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                             <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                         </ul>
                     </div>
@@ -153,6 +156,24 @@ $this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,
         </div>
     </div><!--/header-bottom-->
 </header><!--/header-->
+
+<?php if ($session->hasFlash('msg')): ?>
+	<div class="alert alert-success alert-dismissible show" role="alert">
+        <?php echo $session->getFlash('msg') ?>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+<?php endif; ?>
+
+<?php if ($session->hasFlash('error')): ?>
+	<div class="alert alert-danger alert-dismissible show" role="alert">
+        <?php echo $session->getFlash('error') ?>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+<?php endif; ?>
 
 <?php echo $content ?>
 
@@ -314,7 +335,18 @@ $this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,
 
 </footer><!--/Footer-->
 
+<?php
+Modal::begin([
+    'header' => '<h2>Корзина</h2>',
+    'id' => 'cart',
+    'size' => 'modal-lg',
+    'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+        <a href="' . \yii\helpers\Url::to(['cart/view']) . '" class="btn btn-success">Оформить заказ</a>
+        <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>'
+]);
 
+Modal::end();
+?>
 
 <?php $this->endBody() ?>
 </body>

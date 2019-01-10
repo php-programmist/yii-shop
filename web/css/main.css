@@ -2538,3 +2538,6 @@ h2.title {
 .content-center{
     justify-content: center;
 }
+.del-item{
+  cursor: pointer;
+}
