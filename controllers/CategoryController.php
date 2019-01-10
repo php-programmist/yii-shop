@@ -21,6 +21,10 @@ class CategoryController extends AppController
     public function actionView($id)
     {
         // $id = Yii::$app->request->get('id');
+        $category = Category::findOne($id);
+        if (empty($category)) {
+            throw new \yii\web\HttpException(404, 'Такой категории нет');
+        }
         $pageSize = 3;
         $query    = Product::find()->where(['category_id' => $id]);
         $pages    = new Pagination([
@@ -29,12 +33,11 @@ class CategoryController extends AppController
             'forcePageParam' => false,//Не показывать параметры пагинации на первой странице
             'pageSizeParam'  => false,//Не передавать в адресную строку параметр per-page
         ]);
-        
+    
         $products = $query
             ->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
-        $category = Category::findOne($id);
         $this->setMeta('E-SHOPPER | ' . $category->name, $category->keywords, $category->description);
         
         return $this->render('view', compact('products', 'category', 'pages'));
