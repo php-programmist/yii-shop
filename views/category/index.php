@@ -113,14 +113,14 @@ use yii\helpers\Html;
 <div class="features_items"><!--features_items-->
     <h2 class="title text-center">Features Items</h2>
     <div class="row d-flex content-center">
-	    <?php foreach($hits as $hit): ?>
+	    <?php foreach($hits as $product): ?>
     <div class="col-sm-4 d-flex">
         <div class="product-image-wrapper">
             <div class="single-products">
                 <div class="productinfo text-center">
-                    <?= Html::img("@web/images/products/{$hit->img}", ['alt' => $hit->name])?>
-                    <h2>$<?= $hit->price?></h2>
-                    <p><?= $hit->name?></p>
+                    <?= Html::img("@web/images/products/{$product->img}", ['alt' => $product->name])?>
+                    <h2>$<?= $product->price?></h2>
+                    <p><a href="<?php echo \yii\helpers\Url::to(['product/view','id'=>$product->id]) ?>"><?= $product->name?></a></p>
                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                 </div>
                 <!--<div class="product-overlay">
@@ -130,10 +130,10 @@ use yii\helpers\Html;
                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                 </div>-->
-                <?php if($hit->new): ?>
+                <?php if($product->new): ?>
                     <?= Html::img("@web/images/home/new.png", ['alt' => 'Новинка', 'class' => 'new'])?>
                 <?php endif?>
-                <?php if($hit->sale): ?>
+                <?php if($product->sale): ?>
                     <?= Html::img("@web/images/home/sale.png", ['alt' => 'Распродажа', 'class' => 'new'])?>
                 <?php endif?>
             </div>
