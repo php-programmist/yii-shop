@@ -74,20 +74,32 @@ class CartController extends AppController
         $session->open();
         $this->setMeta('Корзина');
         $order = new Order();
-        if( $order->load(Yii::$app->request->post()) ){
-            $order->qty = $session['cart.qty'];
-            $order->sum = $session['cart.sum'];
-            if($order->save()){
-                $this->saveOrderItems($session['cart'], $order->id);
-                Yii::$app->session->setFlash('msg', 'Ваш заказ принят. Менеджер вскоре свяжется с Вами.');
-                $session->remove('cart');
-                $session->remove('cart.qty');
-                $session->remove('cart.sum');
-                return $this->refresh();
-            }else{
-                Yii::$app->session->setFlash('error', 'Ошибка оформления заказа');
+        $transaction = Order::getDb()->beginTransaction();
+        try{
+            if ($order->load(Yii::$app->request->post())) {
+                $order->qty = $session['cart.qty'];
+                $order->sum = $session['cart.sum'];
+                if ($order->save()) {
+                    $this->saveOrderItems($session['cart'], $order->id);
+                    Yii::$app->session->setFlash('msg', 'Ваш заказ принят. Менеджер вскоре свяжется с Вами.');
+                    $session->remove('cart');
+                    $session->remove('cart.qty');
+                    $session->remove('cart.sum');
+                
+                    return $this->refresh();
+                } else {
+                    Yii::$app->session->setFlash('error', 'Ошибка оформления заказа');
+                }
             }
+        } catch (\Exception $e){
+            $transaction->rollBack();
+            throw $e;
         }
+        catch (\Throwable $e){
+            $transaction->rollBack();
+            throw $e;
+        }
+    
         return $this->render('view', compact('session', 'order'));
     }
     
