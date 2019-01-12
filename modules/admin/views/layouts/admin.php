@@ -8,7 +8,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\assets\ltAppAsset;
 
 AppAsset::register($this);
 $this->registerJsFile('js/html5shiv.js',['position' => yii\web\View::POS_HEAD,'condition' =>'lte IE9']);
@@ -99,7 +98,9 @@ $this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+                                <?php if(!Yii::$app->user->isGuest): ?>
+		                            <li><a href="<?= \yii\helpers\Url::to(['/site/logout'])?>"><i class="fa fa-user"></i> <?= Yii::$app->user->identity['username']?> (Выход)</a></li>
+                                <?php endif;?>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
