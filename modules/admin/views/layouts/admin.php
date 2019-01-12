@@ -11,7 +11,8 @@ use app\assets\AppAsset;
 use app\assets\ltAppAsset;
 
 AppAsset::register($this);
-ltAppAsset::register($this);
+$this->registerJsFile('js/html5shiv.js',['position' => yii\web\View::POS_HEAD,'condition' =>'lte IE9']);
+$this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,'condition' =>'lte IE9']);
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
