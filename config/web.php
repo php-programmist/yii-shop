@@ -12,7 +12,8 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
-            'layout' => 'admin'
+            'layout' => 'admin',
+            'defaultRoute'=>'order/index',
         ],
     ],
     'aliases' => [

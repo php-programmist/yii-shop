@@ -99,7 +99,7 @@ $this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
                                 <?php if(!Yii::$app->user->isGuest): ?>
-		                            <li><a href="<?= \yii\helpers\Url::to(['/site/logout'])?>"><i class="fa fa-user"></i> <?= Yii::$app->user->identity['username']?> (Выход)</a></li>
+                                    <li><a href="<?= \yii\helpers\Url::to(['/site/logout'])?>"><i class="fa fa-user"></i> <?= Yii::$app->user->identity['username']?> (Выход)</a></li>
                                 <?php endif;?>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
@@ -159,7 +159,9 @@ $this->registerJsFile('js/respond.min.js',['position' => yii\web\View::POS_HEAD,
         </div><!--/header-bottom-->
     </header><!--/header-->
 
-    <?= $content ?>
+    <div class="container">
+        <?= $content ?>
+    </div>
 
     <footer id="footer"><!--Footer-->
         <div class="footer-top">
